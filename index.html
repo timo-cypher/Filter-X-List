@@ -34,7 +34,6 @@
 
       ul {
         list-style-type: decimal;
-        margin-left: 120px;
       }
 
       form {
@@ -64,6 +63,16 @@
       .copy-default {
         background-color: #8b8b8b;
         color: #b3b2b0;
+
+        width: 100%;
+        margin: 20px 10px;
+      }
+
+      span {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        align-items: start;
+        margin-left: 120px;
       }
     </style>
   </head>
@@ -76,6 +85,7 @@
           type="text"
           placeholder="VD: OtterGiggles (Không điền @)"
           id="username"
+          required
         />
 
         <label>List of users:</label>
@@ -83,11 +93,12 @@
       </div>
       <div>
         <button type="submit">Filter</button>
-        <button type="button" class="copy-default">Copy</button>
       </div>
     </form>
-
-    <ul class="links"></ul>
+    <span>
+      <button type="button" class="copy-default" disabled>Copy</button>
+      <ul class="links"></ul>
+    </span>
   </body>
   <script src="./main.js"></script>
 </html>
