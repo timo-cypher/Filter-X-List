@@ -58,6 +58,7 @@ const executeFilter = () => {
     li.innerText = `${modifiedItem}`;
     document.querySelector(".links").appendChild(li);
     console.log(extractedLinks);
+    return modifiedItem;
   });
 };
 
