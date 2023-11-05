@@ -50,7 +50,7 @@ const executeFilter = () => {
     let li = document.createElement("li");
     console.log(item, typeof item);
 
-    const modifiedItem = item;
+    let modifiedItem = item;
 
     if (item.includes(")")) {
       modifiedItem = item.substring(0, item.indexOf(")"));
@@ -63,15 +63,18 @@ const executeFilter = () => {
 };
 
 copy.addEventListener("click", () => {
-  console.log("hello");
-
-  console.log(extractedLinksCopy);
-  extractedLinksCopy.map((item) => {
-    copiedLinks += item + "\n";
-  });
-
-  navigator.clipboard.writeText(copiedLinks);
-  copy.innerText = "Copied";
+  copiedLinks = "";
+  navigator.clipboard
+    .writeText("")
+    .then(() => {
+      extractedLinksCopy.map((item) => {
+        copiedLinks += item + "\n";
+      });
+    })
+    .then(() => {
+      navigator.clipboard.writeText(copiedLinks);
+      copy.innerText = "Copied";
+    });
 });
 
 document.querySelector("form").addEventListener("keyup", () => {
