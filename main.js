@@ -48,14 +48,16 @@ const executeFilter = () => {
 
   extractedLinksCopy = extractedLinks.map((item) => {
     let li = document.createElement("li");
+    console.log(item, typeof item);
+
+    const modifiedItem = item;
 
     if (item.includes(")")) {
-      const modifiedItem = item.substring(0, item.indexOf(")"));
-      li.innerText = `${modifiedItem}`;
-      document.querySelector(".links").appendChild(li);
-      console.log(extractedLinks);
-      return modifiedItem;
+      modifiedItem = item.substring(0, item.indexOf(")"));
     }
+    li.innerText = `${modifiedItem}`;
+    document.querySelector(".links").appendChild(li);
+    console.log(extractedLinks);
   });
 };
 
