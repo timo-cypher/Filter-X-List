@@ -1,14 +1,18 @@
 let link = "";
 const form = document.querySelector(".form");
 const copy = document.querySelector(".copy-default");
+const shuffle = document.querySelector(".shuffle");
 
 form.addEventListener("submit", (e) => {
+  console.log("username:", document.querySelector("#username").value);
   document.querySelector(".links").innerHTML = "";
   e.preventDefault();
   link = document.querySelector("#link").value;
   console.log(link);
   copy.setAttribute("style", "color:black; background-color:#f3b200;");
+  shuffle.setAttribute("style", "color:black; background-color:#f3b200;");
   copy.removeAttribute("disabled");
+  shuffle.removeAttribute("disabled");
   executeFilter();
 });
 
@@ -22,12 +26,12 @@ const executeFilter = () => {
   // Using match() to extract links
   let extractedLinks = link.match(regex);
 
-  const index = extractedLinks.findIndex((item) => {
-    return item.includes(document.querySelector("#username").value);
-  });
-
-  console.log(index);
-  extractedLinks.splice(index, 1);
+  extractedLinks = extractedLinks.filter(
+    (item) =>
+      !item
+        .toLowerCase()
+        .includes(document.querySelector("#username").value.toLowerCase())
+  );
 
   // Printing the extracted links
   console.log(extractedLinks);
@@ -35,7 +39,14 @@ const executeFilter = () => {
   const filterArr = [];
 
   for (let i = 0; i < extractedLinks.length - 1; i++) {
-    if (extractedLinks[i].slice(0, 30) === extractedLinks[i + 1].slice(0, 30)) {
+    if (
+      extractedLinks[i].slice(0, 30) === extractedLinks[i + 1].slice(0, 30) &&
+      typeof (
+        +extractedLinks[i].charAt(extractedLinks[i].length - 1) !== "number"
+      ) &&
+      extractedLinks[i].substring(extractedLinks[i] - 10) ===
+        extractedLinks[i + 1].substring(extractedLinks[i + 1] - 10)
+    ) {
       filterArr.push({ link: extractedLinks[i], index: i });
     }
   }
@@ -79,7 +90,30 @@ copy.addEventListener("click", () => {
 
 document.querySelector("form").addEventListener("keyup", () => {
   copy.setAttribute("style", "color:#b3b2b0; background-color:#8b8b8b;");
+  shuffle.setAttribute("style", "color:#b3b2b0; background-color:#8b8b8b;");
   copy.setAttribute("disabled", "");
+  shuffle.setAttribute("disabled", "");
   console.log("disabled");
   copy.innerText = "Copy";
+});
+
+// RAMDOM
+
+// Shuffle the array
+shuffle.addEventListener("click", () => {
+  for (let i = extractedLinksCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [extractedLinksCopy[i], extractedLinksCopy[j]] = [
+      extractedLinksCopy[j],
+      extractedLinksCopy[i],
+    ];
+  }
+  console.log(extractedLinksCopy);
+  document.querySelector(".links").innerHTML = "";
+  extractedLinksCopy.forEach((item) => {
+    let li = document.createElement("li");
+    let modifiedItem = item;
+    li.innerText = `${modifiedItem}`;
+    document.querySelector(".links").appendChild(li);
+  });
 });
