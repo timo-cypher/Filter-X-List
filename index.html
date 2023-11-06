@@ -60,7 +60,8 @@
         width: 100%;
       }
 
-      .copy-default {
+      .copy-default,
+      .shuffle {
         background-color: #8b8b8b;
         color: #b3b2b0;
 
@@ -70,7 +71,7 @@
 
       span {
         display: grid;
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 120px 1fr;
         align-items: start;
         margin-left: 120px;
       }
@@ -96,7 +97,11 @@
       </div>
     </form>
     <span>
-      <button type="button" class="copy-default" disabled>Copy</button>
+      <div>
+        <button type="button" class="copy-default" disabled>Copy</button>
+        <button type="button" class="shuffle" disabled>Ramdomize</button>
+      </div>
+
       <ul class="links"></ul>
     </span>
   </body>
