@@ -4,11 +4,11 @@ const copy = document.querySelector(".copy-default");
 const shuffle = document.querySelector(".shuffle");
 
 form.addEventListener("submit", (e) => {
-  console.log("username:", document.querySelector("#username").value);
+  // console.log("username:", document.querySelector("#username").value);
   document.querySelector(".links").innerHTML = "";
   e.preventDefault();
   link = document.querySelector("#link").value;
-  console.log(link);
+  // console.log(link);
   copy.setAttribute("style", "color:black; background-color:#f3b200;");
   shuffle.setAttribute("style", "color:black; background-color:#f3b200;");
   copy.removeAttribute("disabled");
@@ -34,7 +34,7 @@ const executeFilter = () => {
   );
 
   // Printing the extracted links
-  console.log(extractedLinks);
+  // console.log(extractedLinks);
 
   const filterArr = [];
 
@@ -51,7 +51,7 @@ const executeFilter = () => {
     }
   }
 
-  console.log("FilterArr", filterArr);
+  // console.log("FilterArr", filterArr);
 
   filterArr.reverse().forEach((item) => {
     extractedLinks.splice(item.index, 1);
@@ -59,7 +59,7 @@ const executeFilter = () => {
 
   extractedLinksCopy = extractedLinks.map((item) => {
     let li = document.createElement("li");
-    console.log(item, typeof item);
+    // console.log(item, typeof item);
 
     let modifiedItem = item;
 
@@ -68,7 +68,7 @@ const executeFilter = () => {
     }
     li.innerText = `${modifiedItem}`;
     document.querySelector(".links").appendChild(li);
-    console.log(extractedLinks);
+    // console.log(extractedLinks);
     return modifiedItem;
   });
 };
@@ -93,7 +93,7 @@ document.querySelector("form").addEventListener("keyup", () => {
   shuffle.setAttribute("style", "color:#b3b2b0; background-color:#8b8b8b;");
   copy.setAttribute("disabled", "");
   shuffle.setAttribute("disabled", "");
-  console.log("disabled");
+  // console.log("disabled");
   copy.innerText = "Copy";
 });
 
@@ -108,7 +108,7 @@ shuffle.addEventListener("click", () => {
       extractedLinksCopy[i],
     ];
   }
-  console.log(extractedLinksCopy);
+  // console.log(extractedLinksCopy);
   document.querySelector(".links").innerHTML = "";
   extractedLinksCopy.forEach((item) => {
     let li = document.createElement("li");
