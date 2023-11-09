@@ -101,6 +101,7 @@ document.querySelector("form").addEventListener("keyup", () => {
 
 // Shuffle the array
 shuffle.addEventListener("click", () => {
+   copy.innerText = "Copy";
   for (let i = extractedLinksCopy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [extractedLinksCopy[i], extractedLinksCopy[j]] = [
