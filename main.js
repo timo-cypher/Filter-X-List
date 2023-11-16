@@ -4,11 +4,11 @@ const copy = document.querySelector(".copy-default");
 const shuffle = document.querySelector(".shuffle");
 
 form.addEventListener("submit", (e) => {
-  // console.log("username:", document.querySelector("#username").value);
+  console.log("username:", document.querySelector("#username").value);
   document.querySelector(".links").innerHTML = "";
   e.preventDefault();
   link = document.querySelector("#link").value;
-  // console.log(link);
+  console.log(link);
   copy.setAttribute("style", "color:black; background-color:#f3b200;");
   shuffle.setAttribute("style", "color:black; background-color:#f3b200;");
   copy.removeAttribute("disabled");
@@ -16,15 +16,20 @@ form.addEventListener("submit", (e) => {
   executeFilter();
 });
 
-// Regular expression to extract links
-let regex = /((http|https):\/\/[^\s]+)/g;
-
 let extractedLinksCopy = [];
 let copiedLinks = "";
 
 const executeFilter = () => {
+  // Xử lý phần chỉ nhìn thấy x.com ko có https
+  link = link.replaceAll(" x.com", "https://x.com");
+  console.log(link);
+
+  // Regular expression to extract links
+  let regex = /((http|https):\/\/[^\s]+)/g;
+
   // Using match() to extract links
   let extractedLinks = link.match(regex);
+  console.log(extractedLinks);
 
   extractedLinks = extractedLinks.filter(
     (item) =>
@@ -34,7 +39,7 @@ const executeFilter = () => {
   );
 
   // Printing the extracted links
-  // console.log(extractedLinks);
+  console.log(extractedLinks);
 
   const filterArr = [];
 
@@ -51,7 +56,7 @@ const executeFilter = () => {
     }
   }
 
-  // console.log("FilterArr", filterArr);
+  console.log("FilterArr", filterArr);
 
   filterArr.reverse().forEach((item) => {
     extractedLinks.splice(item.index, 1);
@@ -93,7 +98,7 @@ document.querySelector("form").addEventListener("keyup", () => {
   shuffle.setAttribute("style", "color:#b3b2b0; background-color:#8b8b8b;");
   copy.setAttribute("disabled", "");
   shuffle.setAttribute("disabled", "");
-  // console.log("disabled");
+  console.log("disabled");
   copy.innerText = "Copy";
 });
 
@@ -101,7 +106,6 @@ document.querySelector("form").addEventListener("keyup", () => {
 
 // Shuffle the array
 shuffle.addEventListener("click", () => {
-   copy.innerText = "Copy";
   for (let i = extractedLinksCopy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [extractedLinksCopy[i], extractedLinksCopy[j]] = [
@@ -109,7 +113,7 @@ shuffle.addEventListener("click", () => {
       extractedLinksCopy[i],
     ];
   }
-  // console.log(extractedLinksCopy);
+  console.log(extractedLinksCopy);
   document.querySelector(".links").innerHTML = "";
   extractedLinksCopy.forEach((item) => {
     let li = document.createElement("li");
